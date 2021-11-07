@@ -9,4 +9,4 @@ from .models import details
 class DetailSerializer(serializers.ModelSerializer):
     class Meta:
         model=details
-        fields=['sapId','Full_vaccinate','Name','Age','certificate']
+        fields=['sapId','Full_vaccinate','Name','Age','certificate'] 
