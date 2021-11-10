@@ -1,9 +1,8 @@
 from django.urls import path
-# from .views import DetailsView
+from .views import DetailsView, CheckView
 from . import views
 
 urlpatterns=[
-    path('',views.input,name='input'),
-    path('verif',views.DetailsView,name='Data'),
-    path('details/<str:pk>',views.GetDetails,name='Details')
+    path('details/',DetailsView.as_view(), name='details'),
+    path('check/', CheckView.as_view(), name="check")
 ]
