@@ -48,19 +48,17 @@ def add_folder(name, dep, year):
 
 #function to add pdf file to drive
 def add_file(file, parent_folder_id, sap):
-    file_names = [file]
     mime_types = ["image/jpeg"]
-
-    for file_name in file_names:
-        file_metadata = {
-            'name' : file_name,
-            'parents' : [parent_folder_id]
-        }
-        media = MediaFileUpload('{0}'.format(file_name), mimetype=mime_types[0])
-        service.files().create(
-            body=file_metadata,
-            media_body=media,
-            fields='id'
-        ).execute()
+    
+    file_metadata = {
+        'name' : file,
+        'parents' : [parent_folder_id]
+    }
+    media = MediaFileUpload('{0}'.format(file), mimetype=mime_types[0])
+    service.files().create(
+        body=file_metadata,
+        media_body=media,
+        fields='id'
+    ).execute()
 
     os.remove(str(sap)+".jpg")
