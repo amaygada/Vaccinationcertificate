@@ -63,17 +63,17 @@ class DetailsView(APIView):
             name_ = name.lower().split()
             for i,j in zip(name_,data["name"]):
                 if(i!=j):
-                    print("name error")
+                    # print("name error")
                     flag = False 
                     break 
             #age
             if str(age)!=data["age"][0]:
-                print("age error")
+                # print("age error")
                 flag=False
             
-            print(data)
-            print(name_)
-            print(age, str(age))
+            # print(data)
+            # print(name_)
+            # print(age, str(age))
 
             if flag==False:
                 return Response({"data" : {"val":False, "detail" : "Certificate details don't match form details."}}, status=status.HTTP_400_BAD_REQUEST)
