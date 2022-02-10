@@ -48,6 +48,36 @@ class DetailsView(APIView):
             if verified["val"] == False:
                 return Response({"data" : {"val":verified["val"], "detail" : verified["details"]}}, status=status.HTTP_400_BAD_REQUEST)
 
+
+            #verify if incoming details same as in the pdf
+            data = verified["details"]["data"]
+            flag = True
+            
+            if int(data["age"][0])>24:
+                return Response({"data" : {"val":False, "detail" : "Age in certificate is too high for a student."}}, status=status.HTTP_400_BAD_REQUEST)
+            
+            if int(data["age"][0])<18:
+                return Response({"data" : {"val":False, "detail" : "Age in certificate is too low for a student."}}, status=status.HTTP_400_BAD_REQUEST)
+
+            #name
+            name_ = name.lower().split()
+            for i,j in zip(name_,data["name"]):
+                if(i!=j):
+                    print("name error")
+                    flag = False 
+                    break 
+            #age
+            if str(age)!=data["age"][0]:
+                print("age error")
+                flag=False
+            
+            print(data)
+            print(name_)
+            print(age, str(age))
+
+            if flag==False:
+                return Response({"data" : {"val":False, "detail" : "Certificate details don't match form details."}}, status=status.HTTP_400_BAD_REQUEST)
+
             #add to drive
             im_path = verified["details"]["im_path"]
             s = drive.add_folder(sap, dep, year)
