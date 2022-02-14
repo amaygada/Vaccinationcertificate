@@ -53,7 +53,7 @@ class DetailsView(APIView):
             data = verified["details"]["data"]
             flag = True
             
-            if int(data["age"][0])>24:
+            if int(data["age"][0])>65:
                 return Response({"data" : {"val":False, "detail" : "Age in certificate is too high for a student."}}, status=status.HTTP_400_BAD_REQUEST)
             
             if int(data["age"][0])<18:
